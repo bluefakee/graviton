@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://uh26rmyal3gd"]
+
+[ext_resource type="Script" path="res://Code/GravitonField.cs" id="1_3b7sf"]
+[ext_resource type="Texture2D" uid="uid://1ga4obl0fhh2" path="res://icon.svg" id="2_4cejc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jni23"]
+
+[node name="GravitonField" type="Area2D"]
+script = ExtResource("1_3b7sf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.15257e-07, 1.01328e-06)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("2_4cejc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jni23")

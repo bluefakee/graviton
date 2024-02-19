@@ -7,7 +7,8 @@ public partial class GravitonCharBody : CharacterBody2D
 
 
     [Export] public float GravScale = 1f;
-
+    public bool IsInGravitonField;
+    
 
     public override void _PhysicsProcess(double delta)
     {
