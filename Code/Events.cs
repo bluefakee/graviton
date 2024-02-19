@@ -2,6 +2,6 @@
 
 public static class Events
 {
-    public static StringName PICKEDUP = "_PickedUp";
-    public static StringName DROPPED = "_Dropped";
+    public static StringName PICKED_UP = "_PickedUp";
+    public static StringName DROPPED = "_Dropped"; // Passes Vector2 as Argument
 }

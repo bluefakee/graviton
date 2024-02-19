@@ -24,9 +24,9 @@ public partial class GravitonCharBody : CharacterBody2D
         SetPhysicsProcess(false);
     }
 
-    public void _Dropped()
+    public void _Dropped(Vector2 throwVelocity)
     {
         SetPhysicsProcess(true);
-        Velocity = Vector2.Zero;
+        Velocity = throwVelocity;
     }
 }

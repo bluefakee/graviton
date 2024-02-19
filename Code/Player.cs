@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot;
+using Godot.Collections;
 
 public partial class Player : GravitonCharBody
 {
@@ -8,6 +9,7 @@ public partial class Player : GravitonCharBody
     [Export] public float JumpForce = 450f;
     [Export] public Area2D PickupArea;
     [Export] public RemoteTransform2D PickedUpPivot;
+    [Export] public float ThrowForce = 300f;
 
     private Node _pickedUpColShapeContainer;
     
@@ -55,14 +57,16 @@ public partial class Player : GravitonCharBody
 
             PickedUpPivot.AssignPathTo(_pickedUp);
             DisablePickedUpCollision();
-            _pickedUp.PropagateCall(Events.PICKEDUP);
+            _pickedUp.PropagateCall(Events.PICKED_UP);
         }
         
         else if (Input.IsActionJustReleased("hold_crate") && _pickedUp != null)
         {
             PickedUpPivot.RemotePath = new NodePath("");
             EnablePickedUpCollision();
-            _pickedUp.PropagateCall(Events.DROPPED);
+            var throwVelocity = ThrowForce * (GetViewport().GetMousePosition() - GlobalPosition).Normalized() + Velocity;
+            _pickedUp.PropagateCall(Events.DROPPED, new Array(new Variant[] {throwVelocity}));
+            
             _pickedUp = null;
             _pickedUpInfo = null;
         }
