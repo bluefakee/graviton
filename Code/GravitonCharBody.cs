@@ -7,15 +7,41 @@ public partial class GravitonCharBody : CharacterBody2D
 
 
     [Export] public float GravScale = 1f;
+    [Export] public RayCast2D LeftWallDetector;
+    [Export] public RayCast2D RightWallDetector;
     public bool IsInGravitonField;
 
+
+    public bool OwnIsOnWall { get; private set; }
+    public Vector2 OwnWallNormal { get; private set; }
+    public new bool IsOnWall()
+    {
+        if (base.IsOnWall()) return true;
+        if (LeftWallDetector.GetCollider() != null)
+        {
+            OwnWallNormal = LeftWallDetector.GetCollisionNormal();
+            return OwnIsOnWall = true;
+        }
+
+        if (RightWallDetector.GetCollider() != null)
+        {
+            OwnWallNormal = RightWallDetector.GetCollisionNormal();
+            return OwnIsOnWall = true;
+        }
+
+        return OwnIsOnWall = false;
+    }
+
+
+    public new Vector2 GetWallNormal() => OwnIsOnWall ? OwnWallNormal : base.GetWallNormal();
+    
 
     public bool IsOnFloorJust() => !_prevIsOnFloor && IsOnFloor();
     public bool IsOnWallJust() => !_prevIsOnWall && IsOnWall();
     private bool _prevIsOnFloor;
     private bool _prevIsOnWall;
     private Vector2 _prevVelocity;
-    
+
 
     public override void _PhysicsProcess(double delta)
     {
@@ -27,6 +53,13 @@ public partial class GravitonCharBody : CharacterBody2D
         {
             SetUpDirKeepMomentum(GetWallNormal());
         }
+
+        if (IsInGravitonField && IsOnWall() && IsOnFloorJust())
+        {
+            SetUpDirKeepMomentum(-GetWallNormal());
+        }
+
+        GD.Print(IsOnWall());
         
         // TODO: Bounce of crates that land on the players head
         _prevVelocity = Velocity;

@@ -8,10 +8,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxipd"]
 size = Vector2(60, 45)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PickupArea", "PickedUpPivot")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PickupArea", "PickedUpPivot", "LeftWallDetector", "RightWallDetector")]
 script = ExtResource("1_of7x1")
 PickupArea = NodePath("PickUpArea")
 PickedUpPivot = NodePath("RemoteTransform2D")
+LeftWallDetector = NodePath("LeftWallDetector")
+RightWallDetector = NodePath("RightWallDetector")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
@@ -29,3 +31,11 @@ shape = SubResource("RectangleShape2D_uxipd")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 position = Vector2(0, -30)
+update_rotation = false
+update_scale = false
+
+[node name="RightWallDetector" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
+
+[node name="LeftWallDetector" type="RayCast2D" parent="."]
+target_position = Vector2(-11, 0)

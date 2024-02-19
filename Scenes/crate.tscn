@@ -6,9 +6,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iafpq"]
 
-[node name="Crate" type="CharacterBody2D"]
+[node name="Crate" type="CharacterBody2D" node_paths=PackedStringArray("LeftWallDetector", "RightWallDetector")]
 script = ExtResource("1_hkjbf")
 FloorFriction = 0.32
+LeftWallDetector = NodePath("LeftRayCast2D")
+RightWallDetector = NodePath("RightRayCast2D")
 
 [node name="CanPickup" type="Node" parent="."]
 script = ExtResource("3_ta1lf")
@@ -20,3 +22,9 @@ texture = ExtResource("2_t0lyy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_iafpq")
+
+[node name="LeftRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-11, 0)
+
+[node name="RightRayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
