@@ -12,6 +12,7 @@ public partial class Player : GravitonCharBody
     private Node _pickedUpColShapeContainer;
     
     private Node2D _pickedUp;
+    private CanPickup _pickedUpInfo;
 
 
     public override void _Ready()
@@ -41,17 +42,29 @@ public partial class Player : GravitonCharBody
     {
         base._Process(delta);
         
-        if (Input.IsActionJustPressed("hold_crate") && PickupArea.HasOverlappingBodies())
+        if (Input.IsActionJustPressed("hold_crate") ||
+            Input.IsActionPressed("hold_crate") && _pickedUp == null)
         {
-            (_pickedUp, CanPickup pickedUpInfo) = PickupArea.GetOverlappingBodies()
+            (_pickedUp, _pickedUpInfo) = PickupArea.GetOverlappingBodies()
                 .Select(x => (x, x.GetChild<CanPickup>()))
                 .Where(x => x.Item2 != null)
-                .MinBy(x => (x.x.GlobalPosition - GlobalPosition).LengthSquared());
+                .OrderBy(x => (x.x.GlobalPosition - GlobalPosition).LengthSquared())
+                .FirstOrDefault();
             
             if (_pickedUp == null) return;
 
             PickedUpPivot.AssignPathTo(_pickedUp);
             DisablePickedUpCollision();
+            _pickedUp.PropagateCall(Events.PICKEDUP);
+        }
+        
+        else if (Input.IsActionJustReleased("hold_crate") && _pickedUp != null)
+        {
+            PickedUpPivot.RemotePath = new NodePath("");
+            EnablePickedUpCollision();
+            _pickedUp.PropagateCall(Events.DROPPED);
+            _pickedUp = null;
+            _pickedUpInfo = null;
         }
     }
 
@@ -59,6 +72,13 @@ public partial class Player : GravitonCharBody
     private void DisablePickedUpCollision()
     {
         foreach (var colShape in _pickedUp.GetChildren<CollisionShape2D>())
-            colShape.Reparent(_pickedUpColShapeContainer);
+            colShape.Reparent(_pickedUpColShapeContainer, false);
+    }
+
+
+    private void EnablePickedUpCollision()
+    {
+        foreach (var colShape in _pickedUpColShapeContainer.GetChildren().Select(x => (CollisionShape2D) x))
+            colShape.Reparent(_pickedUp, false);
     }
 }

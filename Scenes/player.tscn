@@ -28,4 +28,4 @@ position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_uxipd")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-position = Vector2(0, -25)
+position = Vector2(0, -30)

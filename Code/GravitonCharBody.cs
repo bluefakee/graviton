@@ -14,6 +14,19 @@ public partial class GravitonCharBody : CharacterBody2D
         base._PhysicsProcess(delta);
 
         Velocity -= UpDirection * GravScale * ProjectSettings.GetSetting("physics/2d/default_gravity").As<float>() * (float) delta;
+        // TODO: Bounce of crates that land on the players head
         MoveAndSlide();
+    }
+
+
+    public void _PickedUp()
+    {
+        SetPhysicsProcess(false);
+    }
+
+    public void _Dropped()
+    {
+        SetPhysicsProcess(true);
+        Velocity = Vector2.Zero;
     }
 }
