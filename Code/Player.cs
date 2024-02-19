@@ -4,9 +4,9 @@ using Godot.Collections;
 
 public partial class Player : GravitonCharBody
 {
-    [Export] public float Speed = 400f;
-    [Export] public float Acceleration = 1700f;
-    [Export] public float JumpForce = 450f;
+    [Export] public float Speed = 300f;
+    [Export] public float Acceleration = 1350f;
+    [Export] public float JumpForce = 300f;
     [Export] public Area2D PickupArea;
     [Export] public RemoteTransform2D PickedUpPivot;
     [Export] public float ThrowForce = 300f;
