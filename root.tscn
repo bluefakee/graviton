@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://py6a31apo2eu"]
+[gd_scene load_steps=5 format=3 uid="uid://py6a31apo2eu"]
 
 [ext_resource type="PackedScene" uid="uid://crslfn0c6qcxn" path="res://Scenes/player.tscn" id="1_y67ha"]
 [ext_resource type="Texture2D" uid="uid://1ga4obl0fhh2" path="res://icon.svg" id="2_f33wc"]
+[ext_resource type="PackedScene" uid="uid://ba6hysam1dr3n" path="res://Scenes/crate.tscn" id="3_gvoaw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grfbx"]
 size = Vector2(128, 128)
@@ -46,3 +47,9 @@ texture = ExtResource("2_f33wc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("RectangleShape2D_grfbx")
+
+[node name="Crate" parent="." instance=ExtResource("3_gvoaw")]
+position = Vector2(795, 169)
+
+[node name="Crate2" parent="." instance=ExtResource("3_gvoaw")]
+position = Vector2(938, 273)
