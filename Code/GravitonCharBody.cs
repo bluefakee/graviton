@@ -54,5 +54,6 @@ public partial class GravitonCharBody : CharacterBody2D
         var floorVelo = ToFloorTrs * _prevVelocity;
         UpDirection = newUp;
         Velocity = floorVelo * ToFloorTrs;
+        Transform = new Transform2D(UpDirection.Rot90CCW(), -UpDirection, Position);
     }
 }
