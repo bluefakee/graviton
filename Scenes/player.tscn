@@ -10,6 +10,9 @@ size = Vector2(60, 45)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PickupArea", "PickedUpPivot", "LeftWallDetector", "RightWallDetector")]
 script = ExtResource("1_of7x1")
+Speed = 200.0
+Acceleration = 1200.0
+JumpForce = 325.0
 PickupArea = NodePath("PickUpArea")
 PickedUpPivot = NodePath("RemoteTransform2D")
 LeftWallDetector = NodePath("LeftWallDetector")
