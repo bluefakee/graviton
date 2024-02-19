@@ -26,7 +26,7 @@ public partial class Player : GravitonCharBody
 
     public override void _PhysicsProcess(double delta)
     {
-        var floorVelo = ToFloorSpaceTrs * Velocity;
+        var floorVelo = ToFloorTrs * Velocity;
 
         // Movement
         floorVelo.X = Mathf.MoveToward(floorVelo.X, Input.GetAxis("move_left", "move_right") * Speed,
@@ -35,7 +35,7 @@ public partial class Player : GravitonCharBody
         // Jumping
         if (IsOnFloor() && Input.IsActionPressed("move_up")) floorVelo.Y = JumpForce;
         
-        Velocity = floorVelo * ToFloorSpaceTrs;
+        Velocity = floorVelo * ToFloorTrs;
         base._PhysicsProcess(delta);
     }
 

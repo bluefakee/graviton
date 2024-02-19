@@ -41,7 +41,7 @@ texture = ExtResource("2_f33wc")
 shape = SubResource("RectangleShape2D_grfbx")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(926, 524)
+position = Vector2(463, 396)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
 texture = ExtResource("2_f33wc")
