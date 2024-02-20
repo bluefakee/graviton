@@ -2,7 +2,7 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 
-public partial class Player : GravitonCharBody
+public partial class Player : GravitonCharBody, IRespawnable
 {
     [Export] public float Speed = 300f;
     [Export] public float Acceleration = 1350f;
@@ -91,4 +91,6 @@ public partial class Player : GravitonCharBody
         foreach (var colShape in _pickedUpColShapeContainer.GetChildren().Select(x => (CollisionShape2D) x))
             colShape.Reparent(_pickedUp, false);
     }
+
+    public void Respawn() => RespawnPoint.Current.Respawn();
 }

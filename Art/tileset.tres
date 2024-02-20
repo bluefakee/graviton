@@ -1,8 +1,10 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://uxnj61143lfp"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://uxnj61143lfp"]
 
 [ext_resource type="Texture2D" uid="uid://cyedkrv2wgfo5" path="res://Art/tilemap.png" id="1_aeggg"]
+[ext_resource type="PackedScene" uid="uid://df8h4ajxh00xr" path="res://Scenes/respawn_trigger.tscn" id="2_bgak5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c54ph"]
+resource_name = "tilemap"
 texture = ExtResource("1_aeggg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -202,6 +204,10 @@ texture_region_size = Vector2i(32, 32)
 2:6/0/terrains_peering_bit/bottom_side = 0
 2:6/0/terrains_peering_bit/top_side = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_itd28"]
+resource_name = "respawn_trigger"
+scenes/1/scene = ExtResource("2_bgak5")
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
@@ -209,3 +215,4 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_c54ph")
+sources/2 = SubResource("TileSetScenesCollectionSource_itd28")
