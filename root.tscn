@@ -1,14 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://py6a31apo2eu"]
 
 [ext_resource type="PackedScene" uid="uid://crslfn0c6qcxn" path="res://Scenes/player.tscn" id="1_y67ha"]
-[ext_resource type="PackedScene" uid="uid://bx72homsosc85" path="res://Scenes/Level/level_1.tscn" id="3_fvg55"]
+[ext_resource type="PackedScene" uid="uid://b2oohkc21la5w" path="res://Scenes/Level/level_2.tscn" id="2_exlbw"]
 
 [node name="Root" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_y67ha")]
-position = Vector2(-243, -47)
+position = Vector2(-192, 188)
+Speed = 220.0
 JumpForce = 375.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Level1" parent="." instance=ExtResource("3_fvg55")]
+[node name="Level2" parent="." instance=ExtResource("2_exlbw")]
+position = Vector2(157, 213)

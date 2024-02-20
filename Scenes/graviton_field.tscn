@@ -1,21 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://uh26rmyal3gd"]
 
 [ext_resource type="Script" path="res://Code/GravitonField.cs" id="1_3b7sf"]
-[ext_resource type="Texture2D" uid="uid://c4yjgnkj31wk8" path="res://Art/tilemap.png" id="2_wjcog"]
+[ext_resource type="Texture2D" uid="uid://cyedkrv2wgfo5" path="res://Art/tilemap.png" id="2_wjcog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dodh"]
-size = Vector2(28, 28)
+size = Vector2(32, 32)
 
 [node name="GravitonField" type="Area2D"]
 script = ExtResource("1_3b7sf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_3dodh")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(7.15257e-07, 1.01328e-06)
-scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wjcog")
 region_enabled = true
-region_rect = Rect2(36, 72, 18, 18)
+region_rect = Rect2(36, 72, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3dodh")
