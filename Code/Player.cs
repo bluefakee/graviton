@@ -4,9 +4,10 @@ using Godot.Collections;
 
 public partial class Player : GravitonCharBody, IRespawnable
 {
-    [Export] public float Speed = 300f;
-    [Export] public float Acceleration = 1350f;
-    [Export] public float JumpForce = 300f;
+    [Export] public float Speed = 200f;
+    [Export] public float FloorAcceleration = 1500f;
+    [Export] public float AirAcceleration = 1500f;
+    [Export] public float JumpForce = 325f;
     [Export] public Area2D PickupArea;
     [Export] public RemoteTransform2D PickedUpPivot;
     [Export] public float ThrowForce = 300f;
@@ -38,7 +39,7 @@ public partial class Player : GravitonCharBody, IRespawnable
 
         // Movement
         floorVelo.X = Mathf.MoveToward(floorVelo.X, Input.GetAxis("move_left", "move_right") * Speed,
-            Acceleration * (float) delta);
+            (IsOnFloor() ? FloorAcceleration : AirAcceleration) * (float) delta);
 
         // Jumping
         if (IsOnFloor() && Input.IsActionPressed("move_up")) floorVelo.Y = JumpForce;
