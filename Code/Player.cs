@@ -11,6 +11,8 @@ public partial class Player : GravitonCharBody
     [Export] public RemoteTransform2D PickedUpPivot;
     [Export] public float ThrowForce = 300f;
 
+    public static Player Instance { get; private set; }
+    
     private Node _pickedUpColShapeContainer;
     
     private Node2D _pickedUp;
@@ -21,6 +23,7 @@ public partial class Player : GravitonCharBody
     {
         base._Ready();
         _pickedUpColShapeContainer = new Node();
+        Instance = this;
     }
 
 
@@ -52,15 +55,16 @@ public partial class Player : GravitonCharBody
                 .Where(x => x.Item2 != null)
                 .OrderBy(x => (x.x.GlobalPosition - GlobalPosition).LengthSquared())
                 .FirstOrDefault();
-            
-            if (_pickedUp == null) return;
 
-            PickedUpPivot.AssignPathTo(_pickedUp);
-            DisablePickedUpCollision();
-            _pickedUp.PropagateCall(Events.PICKED_UP);
+            if (_pickedUp != null)
+            {
+                PickedUpPivot.AssignPathTo(_pickedUp);
+                DisablePickedUpCollision();
+                _pickedUp.PropagateCall(Events.PICKED_UP);
+            }
         }
         
-        else if (Input.IsActionJustReleased("hold_crate") && _pickedUp != null)
+        if (Input.IsActionJustReleased("hold_crate") && _pickedUp != null)
         {
             PickedUpPivot.RemotePath = new NodePath("");
             EnablePickedUpCollision();
@@ -70,6 +74,8 @@ public partial class Player : GravitonCharBody
             _pickedUp = null;
             _pickedUpInfo = null;
         }
+        
+        if (Input.IsActionJustPressed("reset")) RespawnPoint.Current.Respawn();
     }
 
 

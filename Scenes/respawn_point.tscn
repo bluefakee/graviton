@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0p40hkxk84mp"]
+
+[ext_resource type="Script" path="res://Code/RespawnPoint.cs" id="1_m3vnp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aov4o"]
+
+[node name="RespawnPoint" type="Area2D"]
+script = ExtResource("1_m3vnp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_aov4o")

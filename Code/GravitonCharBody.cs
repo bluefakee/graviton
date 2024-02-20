@@ -81,6 +81,12 @@ public partial class GravitonCharBody : CharacterBody2D
     }
 
 
+    public void SetUpDir(Vector2 newUp)
+    {
+        UpDirection = newUp;
+        Transform = new Transform2D(UpDirection.Rot90CCW(), -UpDirection, Position);
+    }
+    
     public void SetUpDirKeepMomentum(Vector2 newUp)
     {
         // _prevVelocity is used because Velocity can be reduced due to running into a wall

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2oohkc21la5w"]
+[gd_scene load_steps=4 format=3 uid="uid://b2oohkc21la5w"]
 
 [ext_resource type="TileSet" uid="uid://uxnj61143lfp" path="res://Art/tileset.tres" id="1_fviwo"]
 [ext_resource type="PackedScene" uid="uid://uh26rmyal3gd" path="res://Scenes/graviton_field.tscn" id="2_a0gps"]
+[ext_resource type="PackedScene" uid="uid://d0p40hkxk84mp" path="res://Scenes/respawn_point.tscn" id="3_oqelb"]
 
 [node name="Level2" type="Node2D"]
 
@@ -13,3 +14,6 @@ layer_0/tile_data = PackedInt32Array(65524, 1, 0, 65525, 65537, 0, 65526, 65537,
 
 [node name="GravitonField" parent="." instance=ExtResource("2_a0gps")]
 position = Vector2(-144, -16)
+
+[node name="RespawnPoint" parent="." instance=ExtResource("3_oqelb")]
+position = Vector2(-334, -18)

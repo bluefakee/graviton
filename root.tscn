@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://py6a31apo2eu"]
 
 [ext_resource type="PackedScene" uid="uid://crslfn0c6qcxn" path="res://Scenes/player.tscn" id="1_y67ha"]
-[ext_resource type="PackedScene" uid="uid://b2oohkc21la5w" path="res://Scenes/Level/level_2.tscn" id="2_exlbw"]
+[ext_resource type="PackedScene" uid="uid://4s1fp3ufoosq" path="res://Scenes/Level/level_3.tscn" id="2_k2n0a"]
 
 [node name="Root" type="Node"]
 
@@ -12,5 +12,5 @@ JumpForce = 375.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Level2" parent="." instance=ExtResource("2_exlbw")]
-position = Vector2(157, 213)
+[node name="Level2" parent="." instance=ExtResource("2_k2n0a")]
+position = Vector2(-205, -131)
