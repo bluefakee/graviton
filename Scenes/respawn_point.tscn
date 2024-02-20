@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0p40hkxk84mp"]
 
-[ext_resource type="Script" path="res://Code/RespawnPoint.cs" id="1_m3vnp"]
+[ext_resource type="Script" path="res://Code/LevelManagement/RespawnPoint.cs" id="1_m3vnp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aov4o"]
 

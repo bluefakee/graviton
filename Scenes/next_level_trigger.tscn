@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpg0i837ci75s"]
+
+[ext_resource type="Script" path="res://Code/LevelManagement/NextLevelTrigger.cs" id="1_sgpvm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aov4o"]
+size = Vector2(32, 64)
+
+[node name="NextLevelTrigger" type="Area2D"]
+script = ExtResource("1_sgpvm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_aov4o")

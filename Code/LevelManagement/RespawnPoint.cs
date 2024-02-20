@@ -3,20 +3,20 @@
 public partial class RespawnPoint : Area2D
 {
     [Export] public Vector2 UpDirection = Vector2.Up;
-    [Export]  public bool IsBeginner;
 
     public static RespawnPoint Current { get; private set; }
+
+
+    public RespawnPoint() : base()
+    {
+        Current = this;
+    }
 
 
     public override void _Ready()
     {
         base._Ready();
         BodyEntered += OnBodyEntered;
-        if (IsBeginner)
-        {
-            if (Current != null) GD.PrintErr("2 RespawnPoints are Beginner!");
-            Current = this;
-        }
     }
 
     private void OnBodyEntered(Node2D body)

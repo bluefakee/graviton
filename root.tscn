@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://py6a31apo2eu"]
+[gd_scene load_steps=4 format=3 uid="uid://py6a31apo2eu"]
 
 [ext_resource type="PackedScene" uid="uid://crslfn0c6qcxn" path="res://Scenes/player.tscn" id="1_y67ha"]
 [ext_resource type="PackedScene" uid="uid://bx72homsosc85" path="res://Scenes/Level/level_1.tscn" id="2_cnx50"]
+[ext_resource type="Script" path="res://Code/LevelManagement/LevelLoader.cs" id="3_tkvbl"]
 
 [node name="Root" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_y67ha")]
-position = Vector2(-192, 188)
 Speed = 220.0
 JumpForce = 375.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Level1" parent="." instance=ExtResource("2_cnx50")]
-position = Vector2(43, 202)
+[node name="LevelLoader" type="Node" parent="."]
+script = ExtResource("3_tkvbl")
+
+[node name="Level1" parent="LevelLoader" instance=ExtResource("2_cnx50")]
