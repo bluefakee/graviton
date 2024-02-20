@@ -38,7 +38,7 @@ update_rotation = false
 update_scale = false
 
 [node name="RightWallDetector" type="RayCast2D" parent="."]
-target_position = Vector2(11, 0)
+target_position = Vector2(13, 0)
 
 [node name="LeftWallDetector" type="RayCast2D" parent="."]
-target_position = Vector2(-11, 0)
+target_position = Vector2(-13, 0)

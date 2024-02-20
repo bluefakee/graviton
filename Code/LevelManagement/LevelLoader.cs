@@ -25,4 +25,15 @@ public partial class LevelLoader : Node
         CallDeferred(Node.MethodName.AddChild, newLevel);
         RespawnPoint.Current.Respawn();
     }
+
+
+#if DEBUG
+    private bool _prevPressed;
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        if (Input.IsKeyPressed(Key.P) && !_prevPressed) NextLevel();
+        _prevPressed = Input.IsKeyPressed(Key.P);
+    }
+#endif
 }

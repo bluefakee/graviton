@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 /// <summary>Note: Calls MoveAndSlide on end of _PhysicsProcess</summary>
@@ -43,6 +44,9 @@ public partial class GravitonCharBody : CharacterBody2D
     private Vector2 _prevVelocity;
 
 
+    public event Action<GravitonCharBody> OnUpDirChange; 
+
+
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
@@ -58,8 +62,6 @@ public partial class GravitonCharBody : CharacterBody2D
         {
             SetUpDirKeepMomentum(-GetWallNormal());
         }
-
-        GD.Print(IsOnWall());
         
         // TODO: Bounce of crates that land on the players head
         _prevVelocity = Velocity;
@@ -85,6 +87,7 @@ public partial class GravitonCharBody : CharacterBody2D
     {
         UpDirection = newUp;
         Transform = new Transform2D(UpDirection.Rot90CCW(), -UpDirection, Position);
+        OnUpDirChange?.Invoke(this);
     }
     
     public void SetUpDirKeepMomentum(Vector2 newUp)
@@ -94,5 +97,6 @@ public partial class GravitonCharBody : CharacterBody2D
         UpDirection = newUp;
         Velocity = floorVelo * ToFloorTrs;
         Transform = new Transform2D(UpDirection.Rot90CCW(), -UpDirection, Position);
+        OnUpDirChange?.Invoke(this);
     }
 }

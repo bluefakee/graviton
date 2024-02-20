@@ -19,11 +19,16 @@ public partial class Player : GravitonCharBody, IRespawnable
     private CanPickup _pickedUpInfo;
 
 
+    public Player() : base()
+    {
+        Instance = this;
+    }
+
+
     public override void _Ready()
     {
         base._Ready();
         _pickedUpColShapeContainer = new Node();
-        Instance = this;
     }
 
 
