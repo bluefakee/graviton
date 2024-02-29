@@ -5,8 +5,10 @@
 [ext_resource type="Script" path="res://Code/CanPickup.cs" id="3_ta1lf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iafpq"]
+size = Vector2(32, 32)
 
 [node name="Crate" type="CharacterBody2D" node_paths=PackedStringArray("LeftWallDetector", "RightWallDetector")]
+floor_stop_on_slope = false
 script = ExtResource("1_hkjbf")
 FloorFriction = 0.32
 LeftWallDetector = NodePath("LeftRayCast2D")
@@ -16,15 +18,15 @@ RightWallDetector = NodePath("RightRayCast2D")
 script = ExtResource("3_ta1lf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.90735e-06, 1.90735e-06)
-scale = Vector2(0.15625, 0.15625)
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_t0lyy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_iafpq")
 
 [node name="LeftRayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(-11, 0)
+target_position = Vector2(-17, 0)
 
 [node name="RightRayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(11, 0)
+target_position = Vector2(17, 0)

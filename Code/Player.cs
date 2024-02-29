@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -10,26 +11,20 @@ public partial class Player : GravitonCharBody, IRespawnable
     [Export] public float JumpForce = 325f;
     [Export] public Area2D PickupArea;
     [Export] public RemoteTransform2D PickedUpPivot;
-    [Export] public float ThrowForce = 300f;
+    [Export] public Vector2 ThrowForce = new(450f, 20f);
 
     public static Player Instance { get; private set; }
     
-    private Node _pickedUpColShapeContainer;
+    private List<CollisionShape2D> _pickedUpColShapes = new();
     
     private Node2D _pickedUp;
     private CanPickup _pickedUpInfo;
-
+    private float _lastMoveDir = 1f;
+    
 
     public Player() : base()
     {
         Instance = this;
-    }
-
-
-    public override void _Ready()
-    {
-        base._Ready();
-        _pickedUpColShapeContainer = new Node();
     }
 
 
@@ -38,11 +33,14 @@ public partial class Player : GravitonCharBody, IRespawnable
         var floorVelo = ToFloorTrs * Velocity;
 
         // Movement
-        floorVelo.X = Mathf.MoveToward(floorVelo.X, Input.GetAxis("move_left", "move_right") * Speed,
+        var horAxis = Input.GetAxis("move_left", "move_right");
+        floorVelo.X = Mathf.MoveToward(floorVelo.X, horAxis * Speed,
             (IsOnFloor() ? FloorAcceleration : AirAcceleration) * (float) delta);
 
         // Jumping
         if (IsOnFloor() && Input.IsActionPressed("move_up")) floorVelo.Y = JumpForce;
+
+        if (horAxis != 0) _lastMoveDir = horAxis;
         
         Velocity = floorVelo * ToFloorTrs;
         base._PhysicsProcess(delta);
@@ -74,7 +72,9 @@ public partial class Player : GravitonCharBody, IRespawnable
         {
             PickedUpPivot.RemotePath = new NodePath("");
             EnablePickedUpCollision();
-            var throwVelocity = ThrowForce * (GetViewport().GetMousePosition() - GlobalPosition).Normalized() + Velocity;
+            var throwVelocity = _lastMoveDir > 0 ?
+                ToFloorTrs * ThrowForce :
+                ToFloorTrs * new Vector2(-ThrowForce.X, ThrowForce.Y);
             _pickedUp.PropagateCall(Events.DROPPED, new Array(new Variant[] {throwVelocity}));
             
             _pickedUp = null;
@@ -88,14 +88,18 @@ public partial class Player : GravitonCharBody, IRespawnable
     private void DisablePickedUpCollision()
     {
         foreach (var colShape in _pickedUp.GetChildren<CollisionShape2D>())
-            colShape.Reparent(_pickedUpColShapeContainer, false);
+        {
+            colShape.Reparent(this);
+            _pickedUpColShapes.Add(colShape);
+        }
     }
 
 
     private void EnablePickedUpCollision()
     {
-        foreach (var colShape in _pickedUpColShapeContainer.GetChildren().Select(x => (CollisionShape2D) x))
-            colShape.Reparent(_pickedUp, false);
+        foreach (var colShape in _pickedUpColShapes)
+            colShape.Reparent(_pickedUp);
+        _pickedUpColShapes.Clear();
     }
 
     public void Respawn() => RespawnPoint.Current.Respawn();

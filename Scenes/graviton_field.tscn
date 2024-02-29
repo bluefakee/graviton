@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cyedkrv2wgfo5" path="res://Art/tilemap.png" id="2_wjcog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3dodh"]
-size = Vector2(32, 32)
+size = Vector2(16, 16)
 
 [node name="GravitonField" type="Area2D"]
 script = ExtResource("1_3b7sf")
@@ -17,4 +17,5 @@ region_enabled = true
 region_rect = Rect2(36, 72, 32, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_3dodh")

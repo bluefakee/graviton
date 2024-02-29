@@ -32,5 +32,7 @@ public partial class RespawnPoint : Area2D
         Player.Instance.GlobalPosition = GlobalPosition;
         Player.Instance.SetUpDir(UpDirection);
         Player.Instance.Velocity = Vector2.Zero;
+        
+        foreach (var crateSpawner in CrateSpawner.AllSpawners) crateSpawner.Respawn();
     }
 }

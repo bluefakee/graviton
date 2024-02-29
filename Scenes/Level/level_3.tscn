@@ -20,12 +20,15 @@ UpDirection = Vector2(-1, 0)
 
 [node name="GravitonField" parent="." instance=ExtResource("2_j8g73")]
 position = Vector2(80, -272)
+rotation = -1.5708
 
 [node name="GravitonField2" parent="." instance=ExtResource("2_j8g73")]
 position = Vector2(-240, -272)
+rotation = 3.14159
 
 [node name="GravitonField3" parent="." instance=ExtResource("2_j8g73")]
 position = Vector2(-240, 16)
+rotation = 1.5708
 
 [node name="NextLevelTrigger" parent="." instance=ExtResource("4_j381b")]
 position = Vector2(304, 144)

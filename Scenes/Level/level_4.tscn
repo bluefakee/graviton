@@ -22,6 +22,7 @@ position = Vector2(112, 176)
 
 [node name="GravitonField2" parent="." instance=ExtResource("3_e7c83")]
 position = Vector2(-112, -272)
+rotation = 3.14159
 
 [node name="NextLevelTrigger" parent="." instance=ExtResource("4_mu1mb")]
 position = Vector2(176, -176)
